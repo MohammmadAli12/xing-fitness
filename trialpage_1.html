@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Your Trial | XING FITNESS CLUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --red: red;
+        --red-glow: rgba(239, 35, 60, 0.4);
+        --red-dim: rgba(239, 35, 60, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Barlow", sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      .font-condensed {
+        font-family: "Barlow Condensed", sans-serif;
+      }
+
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes animStar {
+        from {
+          transform: translateY(0px);
+        }
+        to {
+          transform: translateY(-2000px);
+        }
+      }
+
+      .animate-fade-up {
+        animation: fade-in-up 0.8s ease-out forwards;
+        opacity: 0;
+      }
+      .delay-1 { animation-delay: 0.1s; }
+      .delay-2 { animation-delay: 0.2s; }
+      .delay-3 { animation-delay: 0.3s; }
+
+      .stars-1 {
+        box-shadow:
+          234px 124px #fff,
+          654px 345px #fff,
+          876px 12px #fff,
+          1200px 800px #fff,
+          400px 1500px #fff,
+          1800px 200px #fff,
+          100px 1000px #fff,
+          900px 1900px #fff,
+          500px 600px #fff,
+          1400px 100px #fff,
+          300px 400px #fff,
+          1600px 1200px #fff;
+      }
+      .stars-2 {
+        box-shadow:
+          123px 456px rgba(255, 255, 255, 0.5),
+          789px 234px rgba(255, 255, 255, 0.5),
+          456px 890px rgba(255, 255, 255, 0.5),
+          1100px 300px rgba(255, 255, 255, 0.5),
+          200px 1200px rgba(255, 255, 255, 0.5),
+          1500px 500px rgba(255, 255, 255, 0.5);
+      }
+
+      .text-stroke {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+        color: transparent;
+      }
+
+      .selection-red::selection {
+        background: #ef233c;
+        color: white;
+      }
+
+      .slash-divider {
+        width: 60px;
+        height: 4px;
+        background: var(--red);
+        transform: skewX(-15deg);
+      }
+
+      /* Focus styling for input fields matching your branding */
+      .form-input:focus {
+        border-color: #ef233c;
+        box-shadow: 0 0 15px var(--red-dim);
+        outline: none;
+      }
+    </style>
+  </head>
+  <body class="selection-red">
+    <div class="fixed inset-0 z-0 pointer-events-none">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#1a0303] via-[#0a0000] to-black"></div>
+      <div class="absolute top-0 left-0 w-[1px] h-[1px] bg-transparent stars-1 animate-[animStar_60s_linear_infinite] opacity-30"></div>
+      <div class="absolute top-0 left-0 w-[2px] h-[2px] bg-transparent stars-2 animate-[animStar_100s_linear_infinite] opacity-20"></div>
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-red-600/5 rounded-full blur-[150px]"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(circle_at_center,black_30%,transparent_75%)]"></div>
+    </div>
+
+    <div class="location-bar fixed top-0 left-0 w-full z-[60] bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-6xl mx-auto px-4 py-3">
+        <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-3 sm:gap-4">
+          <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
+            <div class="flex items-center gap-2">
+              <iconify-icon icon="lucide:map-pin" class="w-4 h-4 shrink-0 text-red-500"></iconify-icon>
+              <div class="flex items-center gap-2 text-xs sm:text-sm font-condensed tracking-widest text-white">
+                <span>4th Floor, VV Arcade</span>
+                <span class="text-white/40">Â·</span>
+                <span class="hidden sm:inline">Above Kanti Sweets, AECS Layout</span>
+                <span class="hidden sm:inline text-white/40">Â·</span>
+                <span>Bangalore â€” 560037</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://maps.app.goo.gl/K55FiSmxSYZNcLUx8" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/50 rounded text-xs font-condensed uppercase tracking-widest text-white transition-all duration-300">
+            Get Directions <iconify-icon icon="lucide:external-link" class="w-3.5 h-3.5"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <header class="fixed top-12 left-0 w-full z-50 px-4">
+      <nav class="max-w-6xl mx-auto flex items-center justify-between bg-black/70 backdrop-blur-xl border border-white/10 px-6 py-3 shadow-2xl" style="border-radius: 6px">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="relative w-8 h-8 flex items-center justify-center">
+              <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
+              <span class="relative font-condensed font-900 text-white text-lg z-10">XING</span>
+            </div>
+            <span class="font-condensed font-800 text-xl tracking-widest uppercase">XING FITNESS CLUB</span>
+          </a>
+        </div>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="index.html#programs" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Programs</a>
+          <a href="index.html#coaches" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Coaches</a>
+          <a href="index.html#pricing" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Pricing</a>
+          <a href="index.html#about" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
+        </div>
+        <div>
+          <a href="index.html" class="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5">
+            <iconify-icon icon="lucide:arrow-left"></iconify-icon> Back to Home
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main class="relative z-10 min-h-screen flex items-center justify-center pt-36 pb-20 px-4">
+      <div class="w-full max-w-xl mx-auto">
+        
+        <div class="text-center mb-10 animate-fade-up delay-1">
+          <div class="flex justify-center mb-4">
+            <div class="slash-divider"></div>
+          </div>
+          <h1 class="font-condensed font-900 uppercase text-4xl md:text-6xl leading-none text-white mb-3">
+            CLAIM YOUR <span class="text-[#ef233c]">FREE TRIAL</span>
+          </h1>
+          <p class="text-sm uppercase tracking-widest text-zinc-400 max-w-sm mx-auto">
+            Fill out your stats below to finalize your booking session.
+          </p>
+        </div>
+
+        <div class="bg-zinc-950/60 backdrop-blur-xl border border-white/10 p-8 shadow-2xl animate-fade-up delay-2" style="border-radius: 8px;">
+          <form id="booking-form" class="space-y-6">
+            
+            <div>
+              <label class="block font-condensed text-xs uppercase tracking-widest text-zinc-400 mb-2 font-bold">Full Name</label>
+              <input 
+                type="text" 
+                id="full-name"
+                name="name"
+                required
+                placeholder="e.g. Mohammed Altaf" 
+                class="form-input w-full bg-white/5 border border-white/10 px-4 py-3.5 text-white transition-all font-condensed text-lg"
+                style="border-radius: 4px;"
+              />
+            </div>
+
+            <div>
+              <label class="block font-condensed text-xs uppercase tracking-widest text-zinc-400 mb-2 font-bold">Mobile Number</label>
+              <input 
+                type="tel" 
+                id="mobile-number"
+                name="phone"
+                required
+                placeholder="e.g. +91 XXXXX XXXXX" 
+                class="form-input w-full bg-white/5 border border-white/10 px-4 py-3.5 text-white transition-all font-condensed text-lg"
+                style="border-radius: 4px;"
+              />
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label class="block font-condensed text-xs uppercase tracking-widest text-zinc-400 mb-2 font-bold">Age (Years)</label>
+                <input 
+                  type="number" 
+                  id="age"
+                  name="age"
+                  min="12" 
+                  max="100" 
+                  required
+                  placeholder="e.g. 24" 
+                  class="form-input w-full bg-white/5 border border-white/10 px-4 py-3.5 text-white transition-all font-condensed text-lg"
+                  style="border-radius: 4px;"
+                />
+              </div>
+
+              <div>
+                <label class="block font-condensed text-xs uppercase tracking-widest text-zinc-400 mb-2 font-bold">Weight (kg / lbs)</label>
+                <input 
+                  type="text" 
+                  id="weight"
+                  name="weight"
+                  required
+                  placeholder="e.g. 75 kg" 
+                  class="form-input w-full bg-white/5 border border-white/10 px-4 py-3.5 text-white transition-all font-condensed text-lg"
+                  style="border-radius: 4px;"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label class="block font-condensed text-xs uppercase tracking-widest text-zinc-400 mb-2 font-bold">Workout Experience</label>
+              <select 
+                id="experience"
+                name="experience"
+                required
+                class="form-input w-full bg-zinc-900 border border-white/10 px-4 py-3.5 text-white transition-all font-condensed text-lg appearance-none cursor-pointer"
+                style="border-radius: 4px; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'white\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><polyline points=\'6 9 12 15 18 9\'></polyline></svg>'); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em;"
+              >
+                <option value="" disabled selected class="text-zinc-500">Select your history</option>
+                <option value="beginner">Beginner (First time lifting)</option>
+                <option value="intermediate">Intermediate (1 - 3 Years)</option>
+                <option value="advanced">Advanced (3+ Years / Competitive Athlete)</option>
+              </select>
+            </div>
+
+            <div class="pt-2">
+              <button
+                type="submit"
+                class="w-full group relative inline-flex items-center justify-center overflow-hidden px-8 py-4 bg-[#ef233c] hover:bg-red-700 transition-colors font-condensed font-900 text-white text-xl uppercase tracking-widest shadow-lg"
+                style="border-radius: 4px;"
+              >
+                <span class="relative z-10 flex items-center gap-2">
+                  Book A Trial Session
+                  <iconify-icon icon="lucide:dumbbell" class="group-hover:rotate-12 transition-transform"></iconify-icon>
+                </span>
+              </button>
+            </div>
+
+            <div id="form-status" class="hidden text-center text-sm font-condensed uppercase tracking-widest mt-4 px-4 py-2.5 rounded border"></div>
+          </form>
+          <p class="text-zinc-600 text-[11px] uppercase tracking-wider text-center mt-4">
+            First 7 days free Â· Cancel anytime Â· No credit card required
+          </p>
+        </div>
+
+      </div>
+    </main>
+
+    <footer class="bg-black border-t border-zinc-900 pt-12 pb-10 relative overflow-hidden">
+      <div class="flex justify-center items-center py-4 opacity-[0.04] pointer-events-none select-none">
+        <h1 class="font-condensed font-900 uppercase leading-none tracking-tighter text-stroke" style="font-size: 13vw">
+          xing fitness club
+        </h1>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-6 border-t border-zinc-900 pt-8 flex flex-col md:flex-row items-center justify-between text-zinc-600 text-[10px] uppercase tracking-widest">
+        <p>Â© 2024 xing fitness club. ALL RIGHTS RESERVED.</p>
+        <div class="flex gap-6 mt-4 md:mt-0">
+          <a href="index.html#about" class="hover:text-zinc-400">Privacy</a>
+          <a href="index.html#pricing" class="hover:text-zinc-400">Terms</a>
+          <a href="trialpage_1.html" class="hover:text-zinc-400">Contact</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const form = document.getElementById('booking-form');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const statusDiv = document.getElementById('form-status');
+      
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Disable button & prevent duplicate submissions
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.5';
+        
+        // Show loading state
+        statusDiv.classList.remove('hidden', 'text-green-400', 'text-red-400', 'bg-green-500/10', 'bg-red-500/10', 'border-green-500/20', 'border-red-500/20', 'text-zinc-400', 'bg-zinc-900/50', 'border-white/5');
+        statusDiv.classList.add('text-zinc-400', 'bg-zinc-900/50', 'border-white/5');
+        statusDiv.innerHTML = '<iconify-icon icon="lucide:loader-2" class="animate-spin inline-block mr-2" style="font-size:14px; vertical-align:middle;"></iconify-icon> SUBMITTING REQUEST...';
+        
+        const payload = {
+          name: document.getElementById('full-name').value.trim(),
+          phone: document.getElementById('mobile-number').value.trim(),
+          age: parseInt(document.getElementById('age').value, 10),
+          weight: document.getElementById('weight').value.trim(),
+          experience: document.getElementById('experience').value
+        };
+        
+        try {
+          const response = await fetch('/api/trial-booking', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+          
+          const result = await response.json();
+          
+          if (response.ok && result.success) {
+            statusDiv.classList.remove('text-zinc-400', 'bg-zinc-900/50', 'border-white/5');
+            statusDiv.classList.add('text-green-400', 'bg-green-500/10', 'border-green-500/20');
+            statusDiv.textContent = 'Trial request submitted successfully.';
+            form.reset();
+          } else {
+            throw new Error(result.message || 'Unable to submit right now. Please try again.');
+          }
+        } catch (error) {
+          statusDiv.classList.remove('text-zinc-400', 'bg-zinc-900/50', 'border-white/5');
+          statusDiv.classList.add('text-red-400', 'bg-red-500/10', 'border-red-500/20');
+          statusDiv.textContent = error.message || 'Unable to submit right now. Please try again.';
+          
+          // Re-enable button on failure
+          submitBtn.disabled = false;
+          submitBtn.style.opacity = '1';
+        }
+      });
+    </script>
+  </body>
+</html>

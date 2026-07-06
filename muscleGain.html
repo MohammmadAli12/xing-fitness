@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hypertrophy & Strength System | XING FITNESS CLUB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --red: red;
+        --red-glow: rgba(239, 35, 60, 0.4);
+        --red-dim: rgba(239, 35, 60, 0.15);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Barlow", sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+      }
+
+      .font-condensed {
+        font-family: "Barlow Condensed", sans-serif;
+      }
+
+      @keyframes fade-in-up {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes animStar {
+        from {
+          transform: translateY(0px);
+        }
+        to {
+          transform: translateY(-2000px);
+        }
+      }
+
+      .animate-fade-up {
+        animation: fade-in-up 0.8s ease-out forwards;
+        opacity: 0;
+      }
+      .delay-1 { animation-delay: 0.1s; }
+      .delay-2 { animation-delay: 0.2s; }
+
+      .stars-1 {
+        box-shadow:
+          234px 124px #fff,
+          654px 345px #fff,
+          876px 12px #fff,
+          1200px 800px #fff,
+          400px 1500px #fff,
+          1800px 200px #fff,
+          100px 1000px #fff,
+          900px 1900px #fff,
+          500px 600px #fff,
+          1400px 100px #fff,
+          300px 400px #fff,
+          1600px 1200px #fff;
+      }
+      .stars-2 {
+        box-shadow:
+          123px 456px rgba(255, 255, 255, 0.5),
+          789px 234px rgba(255, 255, 255, 0.5),
+          456px 890px rgba(255, 255, 255, 0.5),
+          1100px 300px rgba(255, 255, 255, 0.5),
+          200px 1200px rgba(255, 255, 255, 0.5),
+          1500px 500px rgba(255, 255, 255, 0.5);
+      }
+
+      .text-stroke {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.08);
+        color: transparent;
+      }
+
+      .selection-red::selection {
+        background: #ef233c;
+        color: white;
+      }
+
+      .slash-divider {
+        width: 60px;
+        height: 4px;
+        background: var(--red);
+        transform: skewX(-15deg);
+      }
+
+      .stat-card:hover {
+        border-color: var(--red);
+        box-shadow: 0 0 30px var(--red-dim);
+      }
+    </style>
+  </head>
+  <body class="selection-red">
+    <!-- Background System -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+      <div class="absolute inset-0 bg-gradient-to-b from-[#1a0303] via-[#0a0000] to-black"></div>
+      <div class="absolute top-0 left-0 w-[1px] h-[1px] bg-transparent stars-1 animate-[animStar_60s_linear_infinite] opacity-30"></div>
+      <div class="absolute top-0 left-0 w-[2px] h-[2px] bg-transparent stars-2 animate-[animStar_100s_linear_infinite] opacity-20"></div>
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-red-600/5 rounded-full blur-[150px]"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(circle_at_center,black_30%,transparent_75%)]"></div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="fixed top-0 left-0 w-full z-50 px-4 pt-4">
+      <nav class="max-w-6xl mx-auto flex items-center justify-between bg-black/70 backdrop-blur-xl border border-white/10 px-6 py-3 shadow-2xl" style="border-radius: 6px">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-3">
+            <div class="relative w-8 h-8 flex items-center justify-center">
+              <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
+              <span class="relative font-condensed font-900 text-white text-lg z-10">XING</span>
+            </div>
+            <span class="font-condensed font-800 text-xl tracking-widest uppercase">XING FITNESS CLUB</span>
+          </a>
+        </div>
+        <div>
+          <a href="trialpage_1.html" class="group relative inline-flex items-center justify-center overflow-hidden px-5 py-2 bg-[#ef233c] hover:bg-red-700 transition-colors" style="border-radius: 4px">
+            <span class="relative z-10 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white">
+              Claim Free Trial
+            </span>
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-24">
+      
+      <!-- HERO -->
+      <section class="text-center max-w-3xl mx-auto mb-24 animate-fade-up delay-1">
+        <p class="text-xs text-red-500 uppercase tracking-widest font-condensed font-bold mb-2">Advanced Hypertrophy Systems</p>
+        <h1 class="font-condensed font-900 uppercase text-5xl md:text-7xl leading-none text-white mb-6">
+          PACK ON PURE, <br/><span class="text-[#ef233c]">DENSE MUSCLE.</span>
+        </h1>
+        <p class="text-zinc-400 text-lg uppercase tracking-wide">
+          Stop executing random routines and gaining pure fat. Learn the strict mathematical metrics of progressive overload.
+        </p>
+      </section>
+
+      <!-- SECTION 1: MISCONCEPTIONS -->
+      <section class="mb-32 animate-fade-up delay-2">
+        <div class="mb-12">
+          <div class="slash-divider mb-4"></div>
+          <p class="text-xs text-zinc-500 uppercase tracking-widest font-condensed mb-1">Section 01 // Growth Barriers</p>
+          <h2 class="font-condensed font-900 uppercase text-3xl md:text-5xl text-white">
+            WHY REPEATED BULKS <span class="text-[#ef233c]">FAILED YOU</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="border border-white/10 bg-zinc-950/40 p-8 stat-card transition-all" style="border-radius: 8px;">
+            <h3 class="font-condensed font-900 uppercase text-xl text-white mb-3 flex items-center gap-2">
+              <iconify-icon icon="lucide:x" class="text-red-500"></iconify-icon> Myth 01: The "Dirty Bulk" Trap
+            </h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">
+              Eating massive caloric spikes without tracking metrics doesn't build faster tissue frames; it just overflows your visceral fat storages. This makes your frame look soft and forces a long, muscle-wasting cut later on.
+            </p>
+          </div>
+
+          <div class="border border-white/10 bg-zinc-950/40 p-8 stat-card transition-all" style="border-radius: 8px;">
+            <h3 class="font-condensed font-900 uppercase text-xl text-white mb-3 flex items-center gap-2">
+              <iconify-icon icon="lucide:x" class="text-red-500"></iconify-icon> Myth 02: Chasing the Muscle Pump
+            </h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">
+              Sweating, dropping weights rapidly, or hunting a temporary visual fluid pump using lightweight isolation sets is highly ineffective. Muscle fiber adaptation only reacts to raw, structural tension and mechanical load expansion.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: HOW TO DO IT RIGHT -->
+      <section class="mb-32">
+        <div class="mb-12">
+          <div class="slash-divider mb-4"></div>
+          <p class="text-xs text-zinc-500 uppercase tracking-widest font-condensed mb-1">Section 02 // Execution Plan</p>
+          <h2 class="font-condensed font-900 uppercase text-3xl md:text-5xl text-white">
+            THE ACCELERATED METHOD TO <span class="text-[#ef233c]">FORGE REAL MASS</span>
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="p-6 border border-zinc-800 bg-black/50" style="border-radius: 8px;">
+            <div class="text-red-500 font-condensed font-900 text-3xl mb-2">01 / OVERLOAD PATHS</div>
+            <p class="text-zinc-400 text-sm">Every single block session must enforce more load, reps, or strategic tension volume than the previous session to force structural fiber hypertrophy.</p>
+          </div>
+          <div class="p-6 border border-zinc-800 bg-black/50" style="border-radius: 8px;">
+            <div class="text-red-500 font-condensed font-900 text-3xl mb-2">02 / LEAN SURPLUS LOGISTICS</div>
+            <p class="text-zinc-400 text-sm">Consuming a precise 200-300 clean calorie window ensures your muscle protein synthesis stays locked on high gear without adding body fat.</p>
+          </div>
+          <div class="p-6 border border-zinc-800 bg-black/50" style="border-radius: 8px;">
+            <div class="text-red-500 font-condensed font-900 text-3xl mb-2">03 / CNS DELOAD CYCLES</div>
+            <p class="text-zinc-400 text-sm">Incorporating systemized 4-6 week recovery deload drop brackets unloads severe central nervous system inflammation, unleashing immediate growth bursts.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: HOW XING HELPS -->
+      <section class="mb-32 bg-zinc-950/40 border border-white/5 p-8 md:p-12" style="border-radius: 8px;">
+        <div class="mb-12">
+          <div class="slash-divider mb-4"></div>
+          <p class="text-xs text-zinc-500 uppercase tracking-widest font-condensed mb-1">Section 03 // The XING Advantage</p>
+          <h2 class="font-condensed font-900 uppercase text-3xl md:text-5xl text-white">
+            HOW XING BUILDS <span class="text-[#ef233c]">YOUR STRENGTH SYSTEM</span>
+          </h2>
+        </div>
+
+        <div class="space-y-4 text-zinc-300">
+          <div class="flex items-start gap-4 p-4 bg-white/[0.02] border border-white/5">
+            <iconify-icon icon="lucide:check-circle" class="text-red-500 text-xl mt-1"></iconify-icon>
+            <div>
+              <h4 class="font-bold text-white uppercase font-condensed text-lg">Hyper-Targeted Programming</h4>
+              <p class="text-zinc-400 text-sm">We provide systematic log-books to mathematically map every rep, set, and mechanical movement pattern under the guidance of elite national lifting coaches.</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4 p-4 bg-white/[0.02] border border-white/5">
+            <iconify-icon icon="lucide:check-circle" class="text-red-500 text-xl mt-1"></iconify-icon>
+            <div>
+              <h4 class="font-bold text-white uppercase font-condensed text-lg">Anabolic Nutritional Structuring</h4>
+              <p class="text-zinc-400 text-sm">Custom macronutrient tracking templates tailored precisely to your unique metabolic profile to maximize lean, aesthetic tissue growth.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALL TO ACTION -->
+      <section class="text-center max-w-2xl mx-auto border-t border-white/10 pt-16">
+        <h2 class="font-condensed font-900 uppercase text-4xl md:text-6xl text-white mb-6">CLAIM YOUR GAINS</h2>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="trialpage_1.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-[#ef233c] hover:bg-red-700 text-white font-condensed font-900 text-xl uppercase tracking-widest transition-all" style="border-radius: 4px;">
+            Book Free Trial Session
+          </a>
+          <a href="index.html" class="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-condensed font-700 text-xl uppercase tracking-widest transition-all" style="border-radius: 4px;">
+            Return to Home
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-zinc-900 py-8 text-center text-zinc-600 text-[10px] uppercase tracking-widest">
+      <p>Â© 2024 xing fitness club. ALL RIGHTS RESERVED.</p>
+    </footer>
+  </body>
+</html>

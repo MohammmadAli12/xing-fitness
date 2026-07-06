@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="XING Fitness Club - Bangalore's premier gym for powerlifting, strength training, HIIT, and Olympic weightlifting. Join 12,000+ members and outwork your potential." />
+  <title>XING | Outwork Your Potential</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700;1,900&family=Barlow:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --red: #ef233c;
+      --red-glow: rgba(239, 35, 60, 0.4);
+      --red-dim: rgba(239, 35, 60, 0.15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Barlow", sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    .font-condensed {
+      font-family: "Barlow Condensed", sans-serif;
+    }
+
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes animStar {
+      from {
+        transform: translateY(0px);
+      }
+
+      to {
+        transform: translateY(-2000px);
+      }
+    }
+
+    @keyframes border-spin {
+      from {
+        --gradient-angle: 0deg;
+      }
+
+      to {
+        --gradient-angle: 360deg;
+      }
+    }
+
+    @keyframes ticker {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    @property --gradient-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
+    }
+
+    .animate-fade-up {
+      animation: fade-in-up 0.8s ease-out forwards;
+      opacity: 0;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.3s;
+    }
+
+    .delay-4 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-5 {
+      animation-delay: 0.55s;
+    }
+
+    .stars-1 {
+      box-shadow: 234px 124px #fff, 654px 345px #fff, 876px 12px #fff, 1200px 800px #fff, 400px 1500px #fff, 1800px 200px #fff, 100px 1000px #fff, 900px 1900px #fff, 500px 600px #fff, 1400px 100px #fff, 300px 400px #fff, 1600px 1200px #fff;
+    }
+
+    .stars-2 {
+      box-shadow: 123px 456px rgba(255, 255, 255, 0.5), 789px 234px rgba(255, 255, 255, 0.5), 456px 890px rgba(255, 255, 255, 0.5), 1100px 300px rgba(255, 255, 255, 0.5), 200px 1200px rgba(255, 255, 255, 0.5), 1500px 500px rgba(255, 255, 255, 0.5);
+    }
+
+    .shiny-cta {
+      --gradient-angle: 0deg;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(#000, #000) padding-box, conic-gradient(from var(--gradient-angle), transparent 0%, #ef233c 5%, #ef233c 15%, transparent 40%) border-box;
+      border: 2px solid transparent;
+      cursor: pointer;
+      animation: border-spin 2.5s linear infinite;
+    }
+
+    .ticker-wrap {
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ticker-inner {
+      display: inline-flex;
+      animation: ticker 20s linear infinite;
+    }
+
+    .stat-card:hover {
+      border-color: var(--red) !important;
+      box-shadow: 0 0 30px var(--red-dim);
+    }
+
+    .plan-card:hover {
+      border-color: rgba(239, 35, 60, 0.5) !important;
+    }
+
+    .slash-divider {
+      width: 60px;
+      height: 4px;
+      background: var(--red);
+      transform: skewX(-15deg);
+    }
+
+    .mobile-menu {
+      display: none;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ::selection {
+      background: #ef233c;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="fixed inset-0 z-0 pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#1a0303] via-[#0a0000] to-black"></div>
+    <div
+      class="absolute top-0 left-0 w-[1px] h-[1px] bg-transparent stars-1 animate-[animStar_60s_linear_infinite] opacity-30">
+    </div>
+    <div
+      class="absolute top-0 left-0 w-[2px] h-[2px] bg-transparent stars-2 animate-[animStar_100s_linear_infinite] opacity-20">
+    </div>
+    <div
+      class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-red-600/5 rounded-full blur-[150px]">
+    </div>
+    <div
+      class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(circle_at_center,black_30%,transparent_75%)]">
+    </div>
+  </div>
+
+  <!-- LOCATION BAR -->
+  <div
+    class="fixed top-0 left-0 w-full z-[60] bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-6xl mx-auto px-4 py-2.5">
+      <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4">
+        <div class="flex items-center gap-2">
+          <iconify-icon icon="lucide:map-pin" class="text-red-500 shrink-0" style="font-size:14px"></iconify-icon>
+          <span class="text-xs sm:text-sm font-condensed tracking-widest text-white/80">
+            4th Floor, VV Arcade &nbsp;&middot;&nbsp;
+            <span class="hidden sm:inline">Above Kanti Sweets, AECS Layout &nbsp;&middot;&nbsp;</span>
+            Bangalore &ndash; 560037
+          </span>
+        </div>
+        <a href="https://maps.app.goo.gl/K55FiSmxSYZNcLUx8" target="_blank"
+          class="flex items-center gap-1.5 px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/50 rounded text-xs font-condensed uppercase tracking-widest text-white transition-all duration-300">
+          Get Directions
+          <iconify-icon icon="lucide:external-link" style="font-size:12px"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="fixed top-[42px] left-0 w-full z-50 px-4">
+    <nav
+      class="max-w-6xl mx-auto flex items-center justify-between bg-black/70 backdrop-blur-xl border border-white/10 px-6 py-3 shadow-2xl"
+      style="border-radius:6px">
+      <div class="flex items-center gap-3">
+        <div class="relative w-8 h-8 flex items-center justify-center">
+          <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
+          <span class="relative font-condensed font-black text-white text-lg z-10">X</span>
+        </div>
+        <span class="font-condensed font-black text-xl tracking-widest uppercase">XING FITNESS CLUB</span>
+      </div>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#programs"
+          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Programs</a>
+        <a href="#coaches"
+          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Coaches</a>
+        <a href="#pricing"
+          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Pricing</a>
+        <a href="#about"
+          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="trialpage_1.html"
+          class="hidden md:block text-sm font-medium text-zinc-400 hover:text-white tracking-wide uppercase">Trial</a>
+        <a href="trialpage_1.html"
+          class="group relative inline-flex items-center justify-center overflow-hidden px-6 py-2 bg-[#ef233c] hover:bg-red-700 transition-colors"
+          style="border-radius:4px">
+          <span class="relative z-10 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white">
+            Join Now <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+          </span>
+        </a>
+        <button id="nav-toggle" class="md:hidden text-white" aria-label="Toggle menu">
+          <iconify-icon icon="lucide:menu" style="font-size:22px"></iconify-icon>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu"
+      class="mobile-menu md:hidden max-w-6xl mx-auto flex-col bg-black/90 backdrop-blur-xl border border-white/10 mt-1 px-6 py-4 gap-4"
+      style="border-radius:6px">
+      <a href="#programs"
+        class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Programs</a>
+      <a href="#coaches" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Coaches</a>
+      <a href="#pricing" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Pricing</a>
+      <a href="#about" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">About</a>
+      <a href="trialpage_1.html"
+        class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Trial</a>
+    </div>
+  </header>
+
+  <main class="relative z-10">
+
+    <!-- HERO -->
+    <section class="min-h-screen flex flex-col items-center justify-center pt-44 pb-0 px-6 relative">
+      <div class="text-center max-w-5xl mx-auto">
+        <div
+          class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/5 border border-white/10 backdrop-blur-md mb-8 animate-fade-up delay-1"
+          style="border-radius:4px">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-[#ef233c]"></span>
+          </span>
+          <span class="text-xs font-medium text-red-100/90 tracking-widest uppercase font-condensed">Now Enrolling
+            &ndash; Monsoon Melt 2026</span>
+          <iconify-icon icon="lucide:arrow-right" class="text-red-400" style="font-size:12px"></iconify-icon>
+        </div>
+
+        <h1 class="font-condensed font-black uppercase leading-[0.9] mb-6 animate-fade-up delay-2"
+          style="font-size:clamp(5rem,14vw,13rem); letter-spacing:-0.02em">
+          <span
+            class="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/30">OUTWORK</span>
+          <span class="block text-[#ef233c]" style="text-shadow:0 0 80px rgba(239,35,60,0.5)">YOUR</span>
+          <span
+            class="block text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/30">POTENTIAL</span>
+        </h1>
+
+        <p
+          class="text-lg md:text-xl text-zinc-400 max-w-xl mx-auto mb-10 leading-relaxed animate-fade-up delay-3 uppercase tracking-wider">
+          We are your reliable partner in your transformation
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-5 animate-fade-up delay-4">
+          <a href="trialpage_1.html" class="shiny-cta group">
+            <span
+              class="relative z-10 flex items-center gap-2 font-condensed font-black text-white text-lg uppercase tracking-widest">
+              Start Training <iconify-icon icon="lucide:dumbbell"></iconify-icon>
+            </span>
+          </a>
+          <a href="#programs"
+            class="flex items-center gap-2 text-sm font-condensed uppercase tracking-widest text-zinc-400 hover:text-white transition-colors">
+            Explore Programs <iconify-icon icon="lucide:chevron-down"></iconify-icon>
+          </a>
+        </div>
+      </div>
+
+      <div class="w-full mt-24 border-y border-white/5 bg-white/[0.015] backdrop-blur-sm py-8">
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center animate-fade-up delay-5">
+          <div>
+            <div class="font-condensed font-black text-5xl text-[#ef233c]">12K+</div>
+            <div class="text-xs text-zinc-500 uppercase tracking-widest mt-1">Members Transformed</div>
+          </div>
+          <div>
+            <div class="font-condensed font-black text-5xl text-[#ef233c]">40+</div>
+            <div class="text-xs text-zinc-500 uppercase tracking-widest mt-1">Expert Coaches</div>
+          </div>
+          <div>
+            <div class="font-condensed font-black text-5xl text-[#ef233c]">8</div>
+            <div class="text-xs text-zinc-500 uppercase tracking-widest mt-1">Locations Worldwide</div>
+          </div>
+          <div>
+            <div class="font-condensed font-black text-5xl text-[#ef233c]">97%</div>
+            <div class="text-xs text-zinc-500 uppercase tracking-widest mt-1">Goal Achievement Rate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="w-full bg-[#ef233c] py-4 overflow-hidden">
+      <div class="ticker-wrap">
+        <div class="ticker-inner">
+          <span class="font-condensed font-black text-black text-xl uppercase tracking-widest px-8">STRENGTH
+            &nbsp;&middot;&nbsp; POWER &nbsp;&middot;&nbsp; ENDURANCE &nbsp;&middot;&nbsp; DISCIPLINE
+            &nbsp;&middot;&nbsp; RECOVERY &nbsp;&middot;&nbsp; NUTRITION &nbsp;&middot;&nbsp; MINDSET
+            &nbsp;&middot;&nbsp; RESULTS &nbsp;&middot;&nbsp;</span>
+          <span class="font-condensed font-black text-black text-xl uppercase tracking-widest px-8">STRENGTH
+            &nbsp;&middot;&nbsp; POWER &nbsp;&middot;&nbsp; ENDURANCE &nbsp;&middot;&nbsp; DISCIPLINE
+            &nbsp;&middot;&nbsp; RECOVERY &nbsp;&middot;&nbsp; NUTRITION &nbsp;&middot;&nbsp; MINDSET
+            &nbsp;&middot;&nbsp; RESULTS &nbsp;&middot;&nbsp;</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRAMS -->
+    <section id="programs" class="py-32 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-16 reveal">
+          <div class="slash-divider mb-4"></div>
+          <p class="text-xs text-zinc-500 uppercase tracking-widest mb-3 font-condensed">What We Offer</p>
+          <h2 class="font-condensed font-black uppercase text-5xl md:text-7xl leading-none text-white">
+            PROGRAMS BUILT<br /><span class="text-[#ef233c]">FOR YOU</span>
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+          <!-- 1. POWERLIFTING & STRENGTH -->
+          <div
+            class="lg:col-span-2 group relative overflow-hidden border border-white/10 bg-gradient-to-b from-zinc-900/60 to-black hover:border-red-600/30 transition-all p-8 stat-card reveal"
+            style="border-radius:8px; min-height:340px">
+            <div
+              class="absolute top-0 right-0 w-64 h-64 bg-red-600/5 rounded-full blur-3xl group-hover:bg-red-600/10 transition-all">
+            </div>
+            <div class="relative z-10 h-full flex flex-col">
+              <div class="mb-5 inline-flex p-3 bg-white/5 border border-white/10 text-[#ef233c]"
+                style="border-radius:6px">
+                <iconify-icon icon="lucide:dumbbell" style="font-size:28px"></iconify-icon>
+              </div>
+              <h3 class="font-condensed font-black uppercase text-4xl text-white mb-3">Powerlifting &amp; Strength</h3>
+              <p class="text-zinc-400 leading-relaxed max-w-lg">Master the big three &mdash; squat, bench, deadlift
+                &mdash; with periodized programming designed by world-class powerlifters. Track PRs, get form reviews,
+                and crush your plateaus.</p>
+            </div>
+          </div>
+
+          <!-- 2. WEIGHT LOSS -->
+          <a href="WeightLoss_1.html"
+            class="group relative overflow-hidden border border-white/10 bg-black hover:border-red-600/30 transition-all p-8 stat-card reveal"
+            style="border-radius:8px">
+            <div class="mb-4 inline-flex p-3 bg-white/5 border border-white/10 text-[#ef233c]"
+              style="border-radius:6px">
+              <iconify-icon icon="lucide:person-standing" style="font-size:24px"></iconify-icon>
+            </div>
+            <h3 class="font-condensed font-black uppercase text-2xl text-white mb-2">Weight Loss</h3>
+            <p class="text-zinc-400 text-sm">Science-backed fat loss training designed to burn fat, preserve lean muscle, improve conditioning, and build sustainable habits.</p>
+          </a>
+
+          <!-- 3. MUSCLE GAIN -->
+          <a href="muscleGain.html"
+            class="group relative overflow-hidden border border-white/10 bg-black hover:border-red-600/30 transition-all p-8 stat-card reveal"
+            style="border-radius:8px">
+            <div class="mb-4 inline-flex p-3 bg-white/5 border border-white/10 text-[#ef233c]"
+              style="border-radius:6px">
+              <iconify-icon icon="lucide:dumbbell" style="font-size:24px"></iconify-icon>
+            </div>
+            <h3 class="font-condensed font-black uppercase text-2xl text-white mb-2">Muscle Gain</h3>
+            <p class="text-zinc-400 text-sm">Structured hypertrophy and strength programming built around progressive overload, recovery, and smart nutrition.</p>
+          </a>
+
+          <!-- 4. RECOVERY & MOBILITY -->
+          <div
+            class="group relative overflow-hidden border border-white/10 bg-black hover:border-red-600/30 transition-all p-8 stat-card reveal"
+            style="border-radius:8px">
+            <div class="mb-4 inline-flex p-3 bg-white/5 border border-white/10 text-green-400"
+              style="border-radius:6px">
+              <iconify-icon icon="lucide:heart-pulse" style="font-size:24px"></iconify-icon>
+            </div>
+            <h3 class="font-condensed font-black uppercase text-2xl text-white mb-2">Recovery &amp; Mobility</h3>
+            <p class="text-zinc-400 text-sm">Structured deload, active recovery, and mobility protocols to keep you
+              training hard &mdash; without injury.</p>
+          </div>
+
+          <!-- 5. NUTRITION COACHING -->
+          <div
+            class="group relative overflow-hidden border border-white/10 bg-black hover:border-red-600/30 transition-all p-8 stat-card reveal"
+            style="border-radius:8px">
+            <div class="mb-4 inline-flex p-3 bg-white/5 border border-white/10 text-purple-400"
+              style="border-radius:6px">
+              <iconify-icon icon="lucide:utensils" style="font-size:24px"></iconify-icon>
+            </div>
+            <h3 class="font-condensed font-black uppercase text-2xl text-white mb-2">Nutrition Coaching</h3>
+            <p class="text-zinc-400 text-sm">Custom macro plans, meal timing strategies, and supplement guidance from
+              certified sports dietitians.</p>
+          </div>
+
+          <!-- 6. HIIT & CONDITIONING -->
+          <div
+            class="group relative overflow-hidden border border-white/10 bg-black hover:border-red-600/30 transition-all p-8 stat-card reveal"
+            style="border-radius:8px">
+            <div class="mb-4 inline-flex p-3 bg-white/5 border border-white/10 text-orange-400"
+              style="border-radius:6px">
+              <iconify-icon icon="lucide:flame" style="font-size:24px"></iconify-icon>
+            </div>
+            <h3 class="font-condensed font-black uppercase text-2xl text-white mb-2">HIIT &amp; Conditioning</h3>
+            <p class="text-zinc-400 text-sm">High-intensity intervals engineered to torch fat, build work capacity, and
+              elevate your cardio ceiling.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <div class="w-full bg-[#ef233c] py-20 px-6 relative overflow-hidden">
+      <div
+        class="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.1)_1px,transparent_1px)] bg-[size:40px_40px]">
+      </div>
+      <div class="max-w-4xl mx-auto text-center relative z-10">
+        <div
+          class="font-condensed font-black text-black text-9xl leading-none opacity-10 absolute -top-4 left-1/2 -translate-x-1/2">
+          "</div>
+        <div class="flex justify-center gap-1 text-black mb-6">
+          <iconify-icon icon="lucide:star" style="font-size:20px" fill="currentColor"></iconify-icon>
+          <iconify-icon icon="lucide:star" style="font-size:20px" fill="currentColor"></iconify-icon>
+          <iconify-icon icon="lucide:star" style="font-size:20px" fill="currentColor"></iconify-icon>
+          <iconify-icon icon="lucide:star" style="font-size:20px" fill="currentColor"></iconify-icon>
+          <iconify-icon icon="lucide:star" style="font-size:20px" fill="currentColor"></iconify-icon>
+        </div>
+        <h3 class="font-condensed font-black uppercase text-3xl md:text-5xl text-black leading-tight mb-8">
+          "In 6 months at XING FITNESS CLUB I went from 180 lbs to my first powerlifting competition. The coaches don't
+          let you settle."
+        </h3>
+        <div class="flex items-center justify-center gap-4">
+          <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center">
+            <iconify-icon icon="lucide:user" class="text-white" style="font-size:24px"></iconify-icon>
+          </div>
+          <div class="text-left">
+            <div class="text-black font-bold text-lg font-condensed uppercase">Mohammed Altaf</div>
+            <div class="text-black/70 font-medium text-sm">Member since 2023 &middot; Powerlifter &middot; Fitness
+              Enthusiast</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COACHES -->
+    <section id="coaches" class="py-32 px-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="mb-16 reveal">
+          <div class="slash-divider mb-4"></div>
+          <p class="text-xs text-zinc-500 uppercase tracking-widest mb-3 font-condensed">The Team</p>
+          <h2 class="font-condensed font-black uppercase text-5xl md:text-7xl leading-none text-white">COACHED
+            BY<br /><span class="text-[#ef233c]">THE ELITE</span></h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+          <div
+            class="group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
+            style="border-radius:8px">
+            <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+              <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
+                  class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
+              <div class="relative z-20">
+                <div
+                  class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
+                  style="border-radius:3px">Strength</div>
+                <div class="font-condensed font-black uppercase text-2xl text-white">Altaf</div>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-zinc-400 text-sm leading-relaxed">Former USAPL National Champion. 8 years coaching elite
+                athletes. Specializes in raw powerlifting and strength periodization.</p>
+              <div class="flex gap-3 mt-4">
+                <div class="text-center">
+                  <div class="font-condensed font-black text-xl text-[#ef233c]">800+</div>
+                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Athletes Coached</div>
+                </div>
+                <div class="w-px bg-zinc-800"></div>
+                <div class="text-center">
+                  <div class="font-condensed font-black text-xl text-[#ef233c]">3x</div>
+                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">National Champ</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
+            style="border-radius:8px">
+            <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+              <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
+                  class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
+              <div class="relative z-20">
+                <div
+                  class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
+                  style="border-radius:3px">HIIT</div>
+                <div class="font-condensed font-black uppercase text-2xl text-white">Sasha "Burn" Voss</div>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-zinc-400 text-sm leading-relaxed">CrossFit Games competitor turned coach. Precision
+                conditioning protocols that push limits without burning out. CSCS certified.</p>
+              <div class="flex gap-3 mt-4">
+                <div class="text-center">
+                  <div class="font-condensed font-black text-xl text-[#ef233c]">5x</div>
+                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Games Qualifier</div>
+                </div>
+                <div class="w-px bg-zinc-800"></div>
+                <div class="text-center">
+                  <div class="font-condensed font-black text-xl text-[#ef233c]">500+</div>
+                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Athletes Coached</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
+            style="border-radius:8px">
+            <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+              <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
+                  class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
+              <div class="relative z-20">
+                <div
+                  class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
+                  style="border-radius:3px">Olympic</div>
+                <div class="font-condensed font-black uppercase text-2xl text-white">Dimitri "Lift" Vasiliev</div>
+              </div>
+            </div>
+            <div class="p-6">
+              <p class="text-zinc-400 text-sm leading-relaxed">Former Olympic Weightlifting team coach from Bulgaria.
+                Technique-obsessed. Produced 12 national champions under his eye.</p>
+              <div class="flex gap-3 mt-4">
+                <div class="text-center">
+                  <div class="font-condensed font-black text-xl text-[#ef233c]">12</div>
+                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">National Champs</div>
+                </div>
+                <div class="w-px bg-zinc-800"></div>
+                <div class="text-center">
+                  <div class="font-condensed font-black text-xl text-[#ef233c]">20yr</div>
+                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Experience</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="py-32 px-6 border-t border-white/5 bg-black/40">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20 reveal">
+          <div class="flex justify-center mb-4">
+            <div class="slash-divider"></div>
+          </div>
+          <p class="text-xs text-zinc-500 uppercase tracking-widest mb-3 font-condensed">Membership</p>
+          <h2 class="font-condensed font-black uppercase text-5xl md:text-7xl leading-none text-white mb-4">INVEST
+            IN<br /><span class="text-white">YOUR BODY</span></h2>
+          <p class="text-zinc-400 max-w-md mx-auto">No hidden fees. No long-term lock-ins.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+          <div class="p-8 border border-zinc-800 bg-black plan-card transition-all flex flex-col reveal"
+            style="border-radius:8px">
+            <div class="mb-2">
+              <div class="text-xs text-zinc-500 uppercase tracking-widest font-condensed mb-1">Tier 01</div>
+              <h3 class="font-condensed font-black uppercase text-3xl text-white">Beginner</h3>
+            </div>
+            <p class="text-zinc-500 text-sm mb-8">Access the floor. Build the habit. No pressure.</p>
+            <div class="mb-8 flex items-baseline gap-1">
+              <span class="text-zinc-500 font-condensed text-xl">&#8377;</span>
+              <span class="font-condensed font-black text-6xl text-white">2999</span>
+              <span class="text-zinc-500 text-sm">/mo</span>
+            </div>
+            <ul class="space-y-4 mb-8 flex-1">
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Gym Floor Access</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>2 Group Classes/Week</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>App Access</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300 opacity-40"><iconify-icon icon="lucide:x"
+                  class="shrink-0"></iconify-icon>Personal Coaching</li>
+            </ul>
+            <a href="trialpage_1.html"
+              class="w-full inline-flex items-center justify-center py-3 px-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-condensed font-black uppercase tracking-wider transition-all"
+              style="border-radius:4px">Get Started</a>
+          </div>
+
+          <div
+            class="relative p-8 border-2 border-white bg-zinc-900/40 shadow-[0_0_50px_rgba(255,255,255,0.12)] flex flex-col scale-105 z-10 reveal"
+            style="border-radius:8px">
+            <div
+              class="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black text-[10px] font-condensed font-black uppercase tracking-widest px-4 py-1.5"
+              style="border-radius:4px">MOST POPULAR</div>
+            <div class="mb-2">
+              <div class="text-xs text-zinc-400 uppercase tracking-widest font-condensed mb-1">Tier 02</div>
+              <h3 class="font-condensed font-black uppercase text-3xl text-white">Half Yearly</h3>
+            </div>
+            <p class="text-zinc-400 text-sm mb-8">Full access, coaching, and structured programming.</p>
+            <div class="mb-8 flex items-baseline gap-1">
+              <span class="text-zinc-400 font-condensed text-xl">&#8377;</span>
+              <span class="font-condensed font-black text-6xl text-white">6999</span>
+              <span class="text-zinc-400 text-sm">&nbsp;/ 6 months</span>
+            </div>
+            <ul class="space-y-4 mb-8 flex-1">
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Unlimited Classes</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Monthly Coach Check-in</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Custom Program</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Nutrition Guidance</li>
+            </ul>
+            <a href="trialpage_1.html"
+              class="w-full inline-flex items-center justify-center py-3 px-4 bg-white hover:bg-gray-200 text-black font-condensed font-black uppercase tracking-wider transition-all"
+              style="border-radius:4px">Go Warrior</a>
+          </div>
+
+          <div class="p-8 border border-zinc-800 bg-black plan-card transition-all flex flex-col reveal"
+            style="border-radius:8px">
+            <div class="mb-2">
+              <div class="text-xs text-zinc-500 uppercase tracking-widest font-condensed mb-1">Tier 03</div>
+              <h3 class="font-condensed font-black uppercase text-3xl text-white">Yearly Plan</h3>
+            </div>
+            <p class="text-zinc-500 text-sm mb-8">Compete-level support. For those who refuse second place.</p>
+            <div class="mb-8 flex items-baseline gap-1">
+              <span class="text-zinc-500 font-condensed text-xl">&#8377;</span>
+              <span class="font-condensed font-black text-6xl text-white">10999</span>
+              <span class="text-zinc-500 text-sm">/year</span>
+            </div>
+            <ul class="space-y-4 mb-8 flex-1">
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Everything in Warrior</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>General Training</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Posture Guidance</li>
+              <li class="flex items-center gap-3 text-sm text-zinc-300"><iconify-icon icon="lucide:check"
+                  class="text-white shrink-0"></iconify-icon>Private Lounge Access</li>
+            </ul>
+            <a href="trialpage_1.html"
+              class="w-full inline-flex items-center justify-center py-3 px-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-condensed font-black uppercase tracking-wider transition-all"
+              style="border-radius:4px">Subscribe for a Year</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-6 text-center relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-black via-white/5 to-black pointer-events-none"></div>
+      <div class="max-w-3xl mx-auto relative z-10 reveal">
+        <p class="text-xs text-zinc-500 uppercase tracking-widest mb-4 font-condensed">Don't Wait</p>
+        <h2 class="font-condensed font-black uppercase leading-none mb-6" style="font-size:clamp(4rem,10vw,8rem)">
+          START <span class="text-white">TODAY</span>
+        </h2>
+        <p class="text-xl text-zinc-400 mb-12">Your transformation starts with a single rep. Join 12,000+ members who
+          decided to stop waiting.</p>
+        <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-4" action="trialpage_1.html" method="get">
+          <input id="cta-email" type="email" placeholder="Enter your email"
+            class="flex-1 bg-white/5 border border-white/10 px-6 py-4 text-white focus:outline-none focus:border-white transition-all font-condensed text-lg"
+            style="border-radius:4px" />
+          <button type="submit"
+            class="bg-white hover:bg-gray-200 text-black font-condensed font-black uppercase tracking-widest px-8 py-4 transition-all whitespace-nowrap"
+            style="border-radius:4px">Claim Spot</button>
+        </form>
+        <p class="text-zinc-600 text-xs mt-4 uppercase tracking-wider">First 7 days free &middot; No credit card
+          required</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer id="about" class="bg-black border-t border-zinc-900 pt-20 pb-10 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 relative z-10">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="relative w-8 h-8 flex items-center justify-center">
+            <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
+            <span class="relative font-condensed font-black text-white text-lg z-10">X</span>
+          </div>
+          <span class="font-condensed font-black text-2xl tracking-widest uppercase">XING Fitness Club</span>
+        </div>
+        <p class="text-zinc-500 max-w-xs leading-relaxed text-sm uppercase">We are your reliable partner in your
+          transformation</p>
+        <div class="flex gap-4 mt-6">
+          <a href="#" aria-label="Instagram"
+            class="w-9 h-9 border border-zinc-800 flex items-center justify-center hover:border-red-600 hover:text-[#ef233c] text-zinc-500 transition-all"
+            style="border-radius:4px"><iconify-icon icon="lucide:instagram" style="font-size:16px"></iconify-icon></a>
+          <a href="#" aria-label="Twitter"
+            class="w-9 h-9 border border-zinc-800 flex items-center justify-center hover:border-red-600 hover:text-[#ef233c] text-zinc-500 transition-all"
+            style="border-radius:4px"><iconify-icon icon="lucide:twitter" style="font-size:16px"></iconify-icon></a>
+          <a href="#" aria-label="YouTube"
+            class="w-9 h-9 border border-zinc-800 flex items-center justify-center hover:border-red-600 hover:text-[#ef233c] text-zinc-500 transition-all"
+            style="border-radius:4px"><iconify-icon icon="lucide:youtube" style="font-size:16px"></iconify-icon></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-xs font-condensed font-black text-[#ef233c] uppercase tracking-widest mb-6">Training</h4>
+        <ul class="space-y-4 text-zinc-400 text-sm">
+          <li><a href="#programs" class="hover:text-white transition-colors">Programs</a></li>
+          <li><a href="#pricing" class="hover:text-white transition-colors">Schedule</a></li>
+          <li><a href="muscleGain.html" class="hover:text-white transition-colors">Nutrition</a></li>
+          <li><a href="WeightLoss_1.html" class="hover:text-white transition-colors">Recovery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xs font-condensed font-black text-[#ef233c] uppercase tracking-widest mb-6">Company</h4>
+        <ul class="space-y-4 text-zinc-400 text-sm">
+          <li><a href="#about" class="hover:text-white transition-colors">Our Story</a></li>
+          <li><a href="#coaches" class="hover:text-white transition-colors">Coaches</a></li>
+          <li><a href="https://maps.app.goo.gl/K55FiSmxSYZNcLUx8" target="_blank"
+              class="hover:text-white transition-colors">Locations</a></li>
+          <li><a href="WeightLoss_1.html" class="hover:text-white transition-colors">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex justify-center items-center py-10 opacity-[0.06] pointer-events-none overflow-hidden">
+      <h2 class="font-condensed font-black uppercase leading-none tracking-tighter select-none"
+        style="font-size:13vw; -webkit-text-stroke:1px rgba(255,255,255,0.08); color:transparent">xing fitness club</h2>
+    </div>
+
+    <div
+      class="max-w-7xl mx-auto px-6 pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-zinc-600 text-xs uppercase tracking-wider">&copy; 2026 XING Fitness Club. All rights reserved.</p>
+      <div class="flex gap-6 text-zinc-600 text-xs uppercase tracking-wider">
+        <a href="#" class="hover:text-zinc-400 transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-zinc-400 transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    toggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function (e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+
+</html>
