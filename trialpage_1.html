@@ -17,6 +17,12 @@
         --red: red;
         --red-glow: rgba(239, 35, 60, 0.4);
         --red-dim: rgba(239, 35, 60, 0.15);
+        --header-h: 120px; /* default fallback for mobile */
+      }
+      @media (min-width: 768px) {
+        :root {
+          --header-h: 80px; /* default fallback for desktop */
+        }
       }
 
       * {
@@ -121,52 +127,57 @@
       <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(circle_at_center,black_30%,transparent_75%)]"></div>
     </div>
 
-    <div class="location-bar fixed top-0 left-0 w-full z-[60] bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-md border-b border-white/10">
-      <div class="max-w-6xl mx-auto px-4 py-3">
-        <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-3 sm:gap-4">
-          <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
-            <div class="flex items-center gap-2">
-              <iconify-icon icon="lucide:map-pin" class="w-4 h-4 shrink-0 text-red-500"></iconify-icon>
-              <div class="flex items-center gap-2 text-xs sm:text-sm font-condensed tracking-widest text-white">
-                <span>4th Floor, VV Arcade</span>
-                <span class="text-white/40">Â·</span>
-                <span class="hidden sm:inline">Above Kanti Sweets, AECS Layout</span>
-                <span class="hidden sm:inline text-white/40">Â·</span>
-                <span>Bangalore â€” 560037</span>
+    <!-- FIXED HEADER WRAPPER -->
+    <div id="fixed-header" class="fixed top-0 left-0 w-full z-50 flex flex-col pointer-events-none">
+      <!-- LOCATION BAR -->
+      <div class="location-bar pointer-events-auto w-full bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-6xl mx-auto px-4 py-3">
+          <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-3 sm:gap-4">
+            <div class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:map-pin" class="w-4 h-4 shrink-0 text-red-500"></iconify-icon>
+                <div class="flex items-center gap-2 text-xs sm:text-sm font-condensed tracking-widest text-white">
+                  <span>4th Floor, VV Arcade</span>
+                  <span class="text-white/40">Â·</span>
+                  <span class="hidden sm:inline">Above Kanti Sweets, AECS Layout</span>
+                  <span class="hidden sm:inline text-white/40">Â·</span>
+                  <span>Bangalore â€” 560037</span>
+                </div>
               </div>
             </div>
+            <a href="https://maps.app.goo.gl/K55FiSmxSYZNcLUx8" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/50 rounded text-xs font-condensed uppercase tracking-widest text-white transition-all duration-300">
+              Get Directions <iconify-icon icon="lucide:external-link" class="w-3.5 h-3.5"></iconify-icon>
+            </a>
           </div>
-          <a href="https://maps.app.goo.gl/K55FiSmxSYZNcLUx8" target="_blank" class="flex items-center gap-1.5 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/50 rounded text-xs font-condensed uppercase tracking-widest text-white transition-all duration-300">
-            Get Directions <iconify-icon icon="lucide:external-link" class="w-3.5 h-3.5"></iconify-icon>
-          </a>
         </div>
       </div>
-    </div>
 
-    <header class="fixed top-12 left-0 w-full z-50 px-4">
-      <nav class="max-w-6xl mx-auto flex items-center justify-between bg-black/70 backdrop-blur-xl border border-white/10 px-6 py-3 shadow-2xl" style="border-radius: 6px">
-        <div class="flex items-center gap-3">
-          <a href="index.html" class="flex items-center gap-3">
-            <div class="relative w-8 h-8 flex items-center justify-center">
-              <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
-              <span class="relative font-condensed font-900 text-white text-lg z-10">XING</span>
-            </div>
-            <span class="font-condensed font-800 text-xl tracking-widest uppercase">XING FITNESS CLUB</span>
-          </a>
-        </div>
-        <div class="hidden md:flex items-center gap-8">
-          <a href="index.html#programs" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Programs</a>
-          <a href="index.html#coaches" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Coaches</a>
-          <a href="index.html#pricing" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Pricing</a>
-          <a href="index.html#about" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
-        </div>
-        <div>
-          <a href="index.html" class="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5">
-            <iconify-icon icon="lucide:arrow-left"></iconify-icon> Back to Home
-          </a>
-        </div>
-      </nav>
-    </header>
+      <!-- NAVBAR -->
+      <header class="pointer-events-auto w-full px-4 pt-2.5">
+        <nav class="max-w-6xl mx-auto flex items-center justify-between bg-black/70 backdrop-blur-xl border border-white/10 px-6 py-3 shadow-2xl" style="border-radius: 6px">
+          <div class="flex items-center gap-3">
+            <a href="index.html" class="flex items-center gap-3">
+              <div class="relative w-8 h-8 flex items-center justify-center">
+                <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
+                <span class="relative font-condensed font-900 text-white text-lg z-10">XING</span>
+              </div>
+              <span class="font-condensed font-800 text-xl tracking-widest uppercase">XING FITNESS CLUB</span>
+            </a>
+          </div>
+          <div class="hidden md:flex items-center gap-8">
+            <a href="index.html#programs" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Programs</a>
+            <a href="index.html#coaches" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Coaches</a>
+            <a href="index.html#pricing" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Pricing</a>
+            <a href="index.html#about" class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
+          </div>
+          <div>
+            <a href="index.html" class="text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5">
+              <iconify-icon icon="lucide:arrow-left"></iconify-icon> Back to Home
+            </a>
+          </div>
+        </nav>
+      </header>
+    </div>
 
     <main class="relative z-10 min-h-screen flex items-center justify-center pt-36 pb-20 px-4">
       <div class="w-full max-w-xl mx-auto">
@@ -352,6 +363,18 @@
           submitBtn.style.opacity = '1';
         }
       });
+
+      // ── Dynamic header height ──
+      const fixedHeader = document.getElementById('fixed-header');
+      function applyHeaderHeight() {
+        if (fixedHeader) {
+          const h = fixedHeader.offsetHeight;
+          document.documentElement.style.setProperty('--header-h', h + 'px');
+        }
+      }
+      applyHeaderHeight();
+      const headerResizeObserver = new ResizeObserver(() => applyHeaderHeight());
+      headerResizeObserver.observe(fixedHeader);
     </script>
   </body>
 </html>

@@ -178,6 +178,119 @@
       background: #ef233c;
       color: white;
     }
+
+    /* ── HEADER OVERLAP FIX ── */
+    :root {
+      --header-h: 120px; /* default fallback for mobile */
+    }
+    @media (min-width: 768px) {
+      :root {
+        --header-h: 80px; /* default fallback for desktop */
+      }
+    }
+
+    /* Logo preserves 1:1 ratio and never shrinks */
+    .xing-logo {
+      position: relative;
+      width: 1.75rem;
+      height: 1.75rem;
+      flex-shrink: 0;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @media (min-width: 768px) {
+      .xing-logo {
+        width: 2rem;
+        height: 2rem;
+      }
+    }
+
+    /* Brand text: allow shrink, never hide, smaller on tiny screens */
+    .xing-brand {
+      font-size: clamp(0.72rem, 3.2vw, 1.25rem);
+      white-space: nowrap;
+      min-width: 0;
+      flex-shrink: 1;
+    }
+
+    /* ── MOBILE TRAINER STACK ── */
+    /* Desktop: unchanged grid */
+    .coaches-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    /* Outer sticky wrapper — only active on mobile */
+    .coach-sticky-wrap {
+      /* desktop: normal block */
+    }
+
+    @media (max-width: 767px) {
+      /* ── MOBILE BRAND FIXES ── */
+      /* Header container outer padding */
+      #main-nav {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+      }
+
+      /* Navbar JOIN NOW: smaller padding so it fits */
+      .join-now-btn {
+        padding-left: 0.65rem !important;
+        padding-right: 0.65rem !important;
+        padding-top: 0.4rem !important;
+        padding-bottom: 0.4rem !important;
+      }
+
+      /* Target inner span specifically to bypass Tailwind's utility class size */
+      .join-now-btn span {
+        font-size: clamp(0.6rem, 1.8vw, 0.75rem) !important;
+      }
+
+      /* ── MOBILE TRAINER STACK ── */
+      .coaches-grid {
+        display: block; /* let sticky children stack naturally */
+        position: relative;
+      }
+
+      .coach-sticky-wrap {
+        position: sticky;
+        /* Each card sticks below the fixed header + small stagger offset */
+        top: calc(var(--header-h) + 16px + var(--stack-stagger, 0px));
+        z-index: var(--stack-z, 1);
+        margin-bottom: 1.5rem;
+        /* transform-origin on outer wrapper; inner .reveal keeps its own transform */
+        transform-origin: top center;
+        will-change: transform;
+      }
+
+      /* The actual card inner: keep reveal on this element */
+      .coach-sticky-wrap > .coach-card-inner {
+        transform-origin: top center;
+      }
+
+      /* Spacer so the section has enough scroll room for stacking */
+      .coaches-section-spacer {
+        height: 40vh;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .coaches-section-spacer {
+        display: none;
+      }
+    }
+
+    /* Reduced motion: disable stack scaling */
+    @media (prefers-reduced-motion: reduce) {
+      .coach-sticky-wrap {
+        position: static !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 
@@ -200,77 +313,81 @@
     </div>
   </div>
 
-  <!-- LOCATION BAR -->
-  <div
-    class="fixed top-0 left-0 w-full z-[60] bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-md border-b border-white/10">
-    <div class="max-w-6xl mx-auto px-4 py-2.5">
-      <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4">
-        <div class="flex items-center gap-2">
-          <iconify-icon icon="lucide:map-pin" class="text-red-500 shrink-0" style="font-size:14px"></iconify-icon>
-          <span class="text-xs sm:text-sm font-condensed tracking-widest text-white/80">
-            4th Floor, VV Arcade &nbsp;&middot;&nbsp;
-            <span class="hidden sm:inline">Above Kanti Sweets, AECS Layout &nbsp;&middot;&nbsp;</span>
-            Bangalore &ndash; 560037
-          </span>
+  <!-- FIXED HEADER WRAPPER -->
+  <div id="fixed-header" class="fixed top-0 left-0 w-full z-50 flex flex-col pointer-events-none">
+    <!-- LOCATION BAR -->
+    <div
+      id="loc-bar"
+      class="pointer-events-auto w-full bg-gradient-to-r from-black/80 via-black/70 to-black/80 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-6xl mx-auto px-4 py-2.5">
+        <div class="flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 sm:gap-4">
+          <div class="flex items-center gap-2">
+            <iconify-icon icon="lucide:map-pin" class="text-red-500 shrink-0" style="font-size:14px"></iconify-icon>
+            <span class="text-xs sm:text-sm font-condensed tracking-widest text-white/80">
+              4th Floor, VV Arcade &nbsp;&middot;&nbsp;
+              <span class="hidden sm:inline">Above Kanti Sweets, AECS Layout &nbsp;&middot;&nbsp;</span>
+              Bangalore &ndash; 560037
+            </span>
+          </div>
+          <a href="https://maps.app.goo.gl/K55FiSmxSYZNcLUx8" target="_blank"
+            class="flex items-center gap-1.5 px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/50 rounded text-xs font-condensed uppercase tracking-widest text-white transition-all duration-300">
+            Get Directions
+            <iconify-icon icon="lucide:external-link" style="font-size:12px"></iconify-icon>
+          </a>
         </div>
-        <a href="https://maps.app.goo.gl/K55FiSmxSYZNcLUx8" target="_blank"
-          class="flex items-center gap-1.5 px-3 py-1 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-red-500/50 rounded text-xs font-condensed uppercase tracking-widest text-white transition-all duration-300">
-          Get Directions
-          <iconify-icon icon="lucide:external-link" style="font-size:12px"></iconify-icon>
-        </a>
       </div>
     </div>
-  </div>
 
-  <!-- NAVBAR -->
-  <header class="fixed top-[42px] left-0 w-full z-50 px-4">
-    <nav
-      class="max-w-6xl mx-auto flex items-center justify-between bg-black/70 backdrop-blur-xl border border-white/10 px-6 py-3 shadow-2xl"
-      style="border-radius:6px">
-      <div class="flex items-center gap-3">
-        <div class="relative w-8 h-8 flex items-center justify-center">
-          <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
-          <span class="relative font-condensed font-black text-white text-lg z-10">X</span>
+    <!-- NAVBAR -->
+    <header id="main-nav" class="pointer-events-auto w-full px-4 pt-2.5">
+      <nav
+        class="max-w-6xl mx-auto flex items-center justify-between bg-black/70 backdrop-blur-xl border border-white/10 px-3 md:px-6 py-2.5 md:py-3 shadow-2xl"
+        style="border-radius:6px">
+        <div class="flex items-center gap-1.5 md:gap-3 min-w-0">
+          <div class="xing-logo">
+            <div class="absolute inset-0 bg-[#ef233c] skew-x-[-8deg]"></div>
+            <span class="relative font-condensed font-black text-white text-lg z-10">X</span>
+          </div>
+          <span class="xing-brand font-condensed font-black tracking-widest uppercase">XING FITNESS CLUB</span>
         </div>
-        <span class="font-condensed font-black text-xl tracking-widest uppercase">XING FITNESS CLUB</span>
-      </div>
-      <div class="hidden md:flex items-center gap-8">
+        <div class="hidden md:flex items-center gap-8">
+          <a href="#programs"
+            class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Programs</a>
+          <a href="#coaches"
+            class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Coaches</a>
+          <a href="#pricing"
+            class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Pricing</a>
+          <a href="#about"
+            class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
+        </div>
+        <div class="flex items-center gap-2 md:gap-4 flex-shrink-0">
+          <a href="trialpage_1.html"
+            class="hidden md:block text-sm font-medium text-zinc-400 hover:text-white tracking-wide uppercase">Trial</a>
+          <a href="trialpage_1.html"
+            class="join-now-btn group relative inline-flex items-center justify-center overflow-hidden px-6 py-2 bg-[#ef233c] hover:bg-red-700 transition-colors"
+            style="border-radius:4px">
+            <span class="relative z-10 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-white">
+              Join Now <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+            </span>
+          </a>
+          <button id="nav-toggle" class="md:hidden text-white" aria-label="Toggle menu">
+            <iconify-icon icon="lucide:menu" style="font-size:22px"></iconify-icon>
+          </button>
+        </div>
+      </nav>
+      <div id="mobile-menu"
+        class="mobile-menu md:hidden max-w-6xl mx-auto flex-col bg-black/90 backdrop-blur-xl border border-white/10 mt-1 px-6 py-4 gap-4"
+        style="border-radius:6px">
         <a href="#programs"
-          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Programs</a>
-        <a href="#coaches"
-          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Coaches</a>
-        <a href="#pricing"
-          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">Pricing</a>
-        <a href="#about"
-          class="text-sm font-medium text-zinc-400 hover:text-white transition-colors tracking-wide uppercase">About</a>
-      </div>
-      <div class="flex items-center gap-4">
+          class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Programs</a>
+        <a href="#coaches" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Coaches</a>
+        <a href="#pricing" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Pricing</a>
+        <a href="#about" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">About</a>
         <a href="trialpage_1.html"
-          class="hidden md:block text-sm font-medium text-zinc-400 hover:text-white tracking-wide uppercase">Trial</a>
-        <a href="trialpage_1.html"
-          class="group relative inline-flex items-center justify-center overflow-hidden px-6 py-2 bg-[#ef233c] hover:bg-red-700 transition-colors"
-          style="border-radius:4px">
-          <span class="relative z-10 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-white">
-            Join Now <iconify-icon icon="lucide:arrow-right"></iconify-icon>
-          </span>
-        </a>
-        <button id="nav-toggle" class="md:hidden text-white" aria-label="Toggle menu">
-          <iconify-icon icon="lucide:menu" style="font-size:22px"></iconify-icon>
-        </button>
+          class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Trial</a>
       </div>
-    </nav>
-    <div id="mobile-menu"
-      class="mobile-menu md:hidden max-w-6xl mx-auto flex-col bg-black/90 backdrop-blur-xl border border-white/10 mt-1 px-6 py-4 gap-4"
-      style="border-radius:6px">
-      <a href="#programs"
-        class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Programs</a>
-      <a href="#coaches" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Coaches</a>
-      <a href="#pricing" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Pricing</a>
-      <a href="#about" class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">About</a>
-      <a href="trialpage_1.html"
-        class="text-sm font-medium text-zinc-300 hover:text-white uppercase tracking-wide">Trial</a>
-    </div>
-  </header>
+    </header>
+  </div>
 
   <main class="relative z-10">
 
@@ -454,7 +571,7 @@
     </section>
 
     <!-- TESTIMONIAL -->
-    <div class="w-full bg-[#ef233c] py-20 px-6 relative overflow-hidden">
+    <div id="testimonial-section" class="w-full bg-[#ef233c] py-20 px-6 relative overflow-hidden">
       <div
         class="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.1)_1px,transparent_1px)] bg-[size:40px_40px]">
       </div>
@@ -469,18 +586,60 @@
           <iconify-icon icon="lucide:star" style="font-size:20px" fill="currentColor"></iconify-icon>
           <iconify-icon icon="lucide:star" style="font-size:20px" fill="currentColor"></iconify-icon>
         </div>
-        <h3 class="font-condensed font-black uppercase text-3xl md:text-5xl text-black leading-tight mb-8">
-          "In 6 months at XING FITNESS CLUB I went from 180 lbs to my first powerlifting competition. The coaches don't
-          let you settle."
-        </h3>
-        <div class="flex items-center justify-center gap-4">
-          <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-            <iconify-icon icon="lucide:user" class="text-white" style="font-size:24px"></iconify-icon>
-          </div>
-          <div class="text-left">
-            <div class="text-black font-bold text-lg font-condensed uppercase">Mohammed Altaf</div>
-            <div class="text-black/70 font-medium text-sm">Member since 2023 &middot; Powerlifter &middot; Fitness
-              Enthusiast</div>
+        <div id="testimonial-viewport" class="w-full overflow-hidden relative cursor-grab active:cursor-grabbing select-none">
+          <div id="testimonial-track" class="flex transition-transform duration-500 ease-out" style="width: 100%;">
+            <!-- Review 1 -->
+            <div class="w-full flex-shrink-0 flex flex-col items-center justify-center px-4" style="flex: 0 0 100%;">
+              <h3 class="font-condensed font-black uppercase text-3xl md:text-5xl text-black leading-tight mb-8">"I have been here 3 years...it is very good gym...very spacious and clean... maintenance was very good..... advanced equipment here ...cross fit and zumba special classes available...it was very nice.....I personally suggest this one. Just visit then able to know....Thanks Xing fitness"</h3>
+              <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                  <iconify-icon icon="lucide:user" class="text-white" style="font-size:24px"></iconify-icon>
+                </div>
+                <div class="text-left">
+                  <div class="text-black font-bold text-lg font-condensed uppercase">Srikanth K</div>
+                  <div class="text-black/70 font-medium text-sm">3 weeks ago</div>
+                </div>
+              </div>
+            </div>
+            <!-- Review 2 -->
+            <div class="w-full flex-shrink-0 flex flex-col items-center justify-center px-4" style="flex: 0 0 100%;">
+              <h3 class="font-condensed font-black uppercase text-3xl md:text-5xl text-black leading-tight mb-8">"This facility stands out for its exceptional cleanliness and well-maintained equipment. The general trainers are highly attentive, knowledgeable, and always ready to help you correct your form. Additionally, the membership pricing is highly competitive for the value provided, and the front desk staff is always welcoming."</h3>
+              <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                  <iconify-icon icon="lucide:user" class="text-white" style="font-size:24px"></iconify-icon>
+                </div>
+                <div class="text-left">
+                  <div class="text-black font-bold text-lg font-condensed uppercase">Somula Pavan Kumar</div>
+                  <div class="text-black/70 font-medium text-sm">5 weeks ago</div>
+                </div>
+              </div>
+            </div>
+            <!-- Review 3 -->
+            <div class="w-full flex-shrink-0 flex flex-col items-center justify-center px-4" style="flex: 0 0 100%;">
+              <h3 class="font-condensed font-black uppercase text-3xl md:text-5xl text-black leading-tight mb-8">"I am a member since January and I have really liked what the place has to offer. Starting from a wide space to fancy equipment's it has it all. For me who loves strength training along with yoga calisthenics and basic Pilates the space on the roof brings all the activities to one place."</h3>
+              <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                  <iconify-icon icon="lucide:user" class="text-white" style="font-size:24px"></iconify-icon>
+                </div>
+                <div class="text-left">
+                  <div class="text-black font-bold text-lg font-condensed uppercase">Nayana Verma</div>
+                  <div class="text-black/70 font-medium text-sm">3 months ago</div>
+                </div>
+              </div>
+            </div>
+            <!-- Review 4 -->
+            <div class="w-full flex-shrink-0 flex flex-col items-center justify-center px-4" style="flex: 0 0 100%;">
+              <h3 class="font-condensed font-black uppercase text-3xl md:text-5xl text-black leading-tight mb-8">"Xing Fitness has a good workout environment with helpful trainers and well-maintained equipment. It is a great place to improve fitness and stay motivated."</h3>
+              <div class="flex items-center justify-center gap-4">
+                <div class="w-12 h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
+                  <iconify-icon icon="lucide:user" class="text-white" style="font-size:24px"></iconify-icon>
+                </div>
+                <div class="text-left">
+                  <div class="text-black font-bold text-lg font-condensed uppercase">Sandy Raghav</div>
+                  <div class="text-black/70 font-medium text-sm">3 weeks ago</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -495,102 +654,113 @@
           <h2 class="font-condensed font-black uppercase text-5xl md:text-7xl leading-none text-white">COACHED
             BY<br /><span class="text-[#ef233c]">THE ELITE</span></h2>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="coaches-grid" id="coaches-grid">
 
-          <div
-            class="group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
-            style="border-radius:8px">
-            <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-              <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
-                  class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
-              <div class="relative z-20">
-                <div
-                  class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
-                  style="border-radius:3px">Strength</div>
-                <div class="font-condensed font-black uppercase text-2xl text-white">Altaf</div>
-              </div>
-            </div>
-            <div class="p-6">
-              <p class="text-zinc-400 text-sm leading-relaxed">Former USAPL National Champion. 8 years coaching elite
-                athletes. Specializes in raw powerlifting and strength periodization.</p>
-              <div class="flex gap-3 mt-4">
-                <div class="text-center">
-                  <div class="font-condensed font-black text-xl text-[#ef233c]">800+</div>
-                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Athletes Coached</div>
+          <!-- CARD 1: ALTAF -->
+          <div class="coach-sticky-wrap" style="--stack-stagger: 0px; --stack-z: 1">
+            <div
+              class="coach-card-inner group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
+              style="border-radius:8px">
+              <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
+                    class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
+                <div class="relative z-20">
+                  <div
+                    class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
+                    style="border-radius:3px">Strength</div>
+                  <div class="font-condensed font-black uppercase text-2xl text-white">Altaf</div>
                 </div>
-                <div class="w-px bg-zinc-800"></div>
-                <div class="text-center">
-                  <div class="font-condensed font-black text-xl text-[#ef233c]">3x</div>
-                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">National Champ</div>
+              </div>
+              <div class="p-6">
+                <p class="text-zinc-400 text-sm leading-relaxed">Former USAPL National Champion. 8 years coaching elite
+                  athletes. Specializes in raw powerlifting and strength periodization.</p>
+                <div class="flex gap-3 mt-4">
+                  <div class="text-center">
+                    <div class="font-condensed font-black text-xl text-[#ef233c]">800+</div>
+                    <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Athletes Coached</div>
+                  </div>
+                  <div class="w-px bg-zinc-800"></div>
+                  <div class="text-center">
+                    <div class="font-condensed font-black text-xl text-[#ef233c]">3x</div>
+                    <div class="text-[10px] text-zinc-600 uppercase tracking-wider">National Champ</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div
-            class="group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
-            style="border-radius:8px">
-            <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-              <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
-                  class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
-              <div class="relative z-20">
-                <div
-                  class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
-                  style="border-radius:3px">HIIT</div>
-                <div class="font-condensed font-black uppercase text-2xl text-white">Sasha "Burn" Voss</div>
-              </div>
-            </div>
-            <div class="p-6">
-              <p class="text-zinc-400 text-sm leading-relaxed">CrossFit Games competitor turned coach. Precision
-                conditioning protocols that push limits without burning out. CSCS certified.</p>
-              <div class="flex gap-3 mt-4">
-                <div class="text-center">
-                  <div class="font-condensed font-black text-xl text-[#ef233c]">5x</div>
-                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Games Qualifier</div>
+          <!-- CARD 2: SASHA -->
+          <div class="coach-sticky-wrap" style="--stack-stagger: 12px; --stack-z: 2">
+            <div
+              class="coach-card-inner group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
+              style="border-radius:8px">
+              <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
+                    class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
+                <div class="relative z-20">
+                  <div
+                    class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
+                    style="border-radius:3px">HIIT</div>
+                  <div class="font-condensed font-black uppercase text-2xl text-white">Sasha "Burn" Voss</div>
                 </div>
-                <div class="w-px bg-zinc-800"></div>
-                <div class="text-center">
-                  <div class="font-condensed font-black text-xl text-[#ef233c]">500+</div>
-                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Athletes Coached</div>
+              </div>
+              <div class="p-6">
+                <p class="text-zinc-400 text-sm leading-relaxed">CrossFit Games competitor turned coach. Precision
+                  conditioning protocols that push limits without burning out. CSCS certified.</p>
+                <div class="flex gap-3 mt-4">
+                  <div class="text-center">
+                    <div class="font-condensed font-black text-xl text-[#ef233c]">5x</div>
+                    <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Games Qualifier</div>
+                  </div>
+                  <div class="w-px bg-zinc-800"></div>
+                  <div class="text-center">
+                    <div class="font-condensed font-black text-xl text-[#ef233c]">500+</div>
+                    <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Athletes Coached</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div
-            class="group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
-            style="border-radius:8px">
-            <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
-              <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
-                  class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
-              <div class="relative z-20">
-                <div
-                  class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
-                  style="border-radius:3px">Olympic</div>
-                <div class="font-condensed font-black uppercase text-2xl text-white">Dimitri "Lift" Vasiliev</div>
-              </div>
-            </div>
-            <div class="p-6">
-              <p class="text-zinc-400 text-sm leading-relaxed">Former Olympic Weightlifting team coach from Bulgaria.
-                Technique-obsessed. Produced 12 national champions under his eye.</p>
-              <div class="flex gap-3 mt-4">
-                <div class="text-center">
-                  <div class="font-condensed font-black text-xl text-[#ef233c]">12</div>
-                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">National Champs</div>
+          <!-- CARD 3: DIMITRI -->
+          <div class="coach-sticky-wrap" style="--stack-stagger: 24px; --stack-z: 3">
+            <div
+              class="coach-card-inner group border border-white/10 bg-gradient-to-b from-zinc-900/50 to-black transition-all overflow-hidden stat-card reveal"
+              style="border-radius:8px">
+              <div class="h-64 bg-gradient-to-br from-zinc-800 to-zinc-900 flex items-end p-6 relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <div class="absolute inset-0 flex items-center justify-center"><iconify-icon icon="lucide:user-circle"
+                    class="text-zinc-600 opacity-30" style="font-size:8rem"></iconify-icon></div>
+                <div class="relative z-20">
+                  <div
+                    class="inline-flex px-2 py-0.5 bg-[#ef233c] text-xs font-condensed font-black uppercase tracking-widest text-white mb-2"
+                    style="border-radius:3px">Olympic</div>
+                  <div class="font-condensed font-black uppercase text-2xl text-white">Dimitri "Lift" Vasiliev</div>
                 </div>
-                <div class="w-px bg-zinc-800"></div>
-                <div class="text-center">
-                  <div class="font-condensed font-black text-xl text-[#ef233c]">20yr</div>
-                  <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Experience</div>
+              </div>
+              <div class="p-6">
+                <p class="text-zinc-400 text-sm leading-relaxed">Former Olympic Weightlifting team coach from Bulgaria.
+                  Technique-obsessed. Produced 12 national champions under his eye.</p>
+                <div class="flex gap-3 mt-4">
+                  <div class="text-center">
+                    <div class="font-condensed font-black text-xl text-[#ef233c]">12</div>
+                    <div class="text-[10px] text-zinc-600 uppercase tracking-wider">National Champs</div>
+                  </div>
+                  <div class="w-px bg-zinc-800"></div>
+                  <div class="text-center">
+                    <div class="font-condensed font-black text-xl text-[#ef233c]">20yr</div>
+                    <div class="text-[10px] text-zinc-600 uppercase tracking-wider">Experience</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
         </div>
+        <!-- Spacer so final card can un-stick cleanly on mobile -->
+        <div class="coaches-section-spacer"></div>
       </div>
     </section>
 
@@ -784,22 +954,286 @@
   </footer>
 
   <script>
+    // ── Mobile menu toggle ──
     const toggle = document.getElementById('nav-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     toggle.addEventListener('click', () => mobileMenu.classList.toggle('open'));
     mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    // ── Reveal on scroll ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
     }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
+    // ── Smooth anchor scrolling ──
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', function (e) {
         const t = document.querySelector(this.getAttribute('href'));
         if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       });
     });
+
+    // ── CHANGE 1: Dynamic header height ──
+    const fixedHeader = document.getElementById('fixed-header');
+
+    function applyHeaderHeight() {
+      if (fixedHeader) {
+        const h = fixedHeader.offsetHeight;
+        document.documentElement.style.setProperty('--header-h', h + 'px');
+      }
+    }
+
+    // Measure immediately, then watch for resizes
+    applyHeaderHeight();
+    const headerResizeObserver = new ResizeObserver(() => applyHeaderHeight());
+    headerResizeObserver.observe(fixedHeader);
+
+    // ── CHANGE 2: Mobile trainer scroll-stack depth scaling ──
+    // Only runs on mobile (< 768px). Uses passive rAF loop for smooth perf.
+    // Does NOT interfere with .reveal (which runs on inner .coach-card-inner).
+    // Respects prefers-reduced-motion.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!prefersReducedMotion) {
+      const wraps = Array.from(document.querySelectorAll('.coach-sticky-wrap'));
+      let rafId = null;
+      let lastScrollY = -1;
+
+      function updateCoachScale() {
+        rafId = null;
+        if (window.innerWidth >= 768) {
+          // Reset transforms on desktop
+          wraps.forEach(w => { w.style.transform = ''; });
+          return;
+        }
+
+        const scrollY = window.scrollY;
+        if (scrollY === lastScrollY) return;
+        lastScrollY = scrollY;
+
+        const headerH = fixedHeader ? fixedHeader.offsetHeight : 120;
+
+        wraps.forEach((wrap, i) => {
+          let scale = 1.0;
+
+          // For each card j after card i, check if it's scrolling up to stack over card i.
+          for (let j = i + 1; j < wraps.length; j++) {
+            const rectNext = wraps[j].getBoundingClientRect();
+            // Target sticky top position relative to viewport for card j
+            const stickyTopNext = headerH + 16 + (j * 12);
+            const distance = rectNext.top - stickyTopNext;
+
+            // Interpolate scale reduction over 150px of scroll progress before sticking
+            const range = 150;
+            let progress = 0;
+            if (distance <= 0) {
+              progress = 1;
+            } else if (distance < range) {
+              progress = 1 - (distance / range);
+            }
+
+            // Reduce scale smoothly by up to 0.03 per stacking card
+            scale -= progress * 0.03;
+          }
+
+          // Apply subtle scale depth
+          scale = Math.max(0.90, scale);
+          wrap.style.transform = `scale(${scale})`;
+        });
+      }
+
+      function onScroll() {
+        if (!rafId) rafId = requestAnimationFrame(updateCoachScale);
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+          wraps.forEach(w => { w.style.transform = ''; });
+        } else {
+          onScroll();
+        }
+      });
+
+      // Run once immediately
+      updateCoachScale();
+    }
+
+    // ── Testimonial carousel ──
+    (function () {
+      var track = document.getElementById('testimonial-track');
+      var viewport = document.getElementById('testimonial-viewport');
+      var total = 4;
+      var idx = 0;
+      var timer = null;
+      var paused = false;
+
+      // Touch state
+      var touchStartX = 0;
+      var touchStartY = 0;
+      var touchCurrentX = 0;
+      var touchCurrentY = 0;
+      var isSwipe = false;
+      var isScrolling = false;
+
+      // Mouse drag state
+      var isMouseDown = false;
+      var mouseStartX = 0;
+      var mouseCurrentX = 0;
+      var isMouseSwipe = false;
+
+      function updateSlide(transition) {
+        if (transition !== false) {
+          track.style.transition = 'transform 0.5s ease-out';
+        } else {
+          track.style.transition = 'none';
+        }
+        track.style.transform = 'translateX(' + (-idx * 100) + '%)';
+      }
+
+      function next() {
+        idx = (idx + 1) % total;
+        updateSlide();
+      }
+
+      function startTimer() {
+        if (!timer) {
+          timer = setInterval(function () {
+            if (!paused) next();
+          }, 5000);
+        }
+      }
+
+      function stopTimer() {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        }
+      }
+
+      startTimer();
+
+      // Mouse hover pause/resume
+      viewport.addEventListener('mouseenter', function () {
+        paused = true;
+      });
+      viewport.addEventListener('mouseleave', function () {
+        paused = false;
+        if (!isMouseDown) {
+          stopTimer();
+          startTimer();
+        }
+      });
+
+      // Touch events for mobile swiping
+
+      viewport.addEventListener('touchstart', function (e) {
+        paused = true;
+        stopTimer();
+        var touch = e.touches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        isSwipe = false;
+        isScrolling = false;
+        track.style.transition = 'none';
+      }, { passive: true });
+
+      viewport.addEventListener('touchmove', function (e) {
+        if (isScrolling) return;
+
+        var touch = e.touches[0];
+        touchCurrentX = touch.clientX;
+        touchCurrentY = touch.clientY;
+
+        var diffX = touchCurrentX - touchStartX;
+        var diffY = touchCurrentY - touchStartY;
+
+        // Detect scrolling vs swiping
+        if (!isSwipe && !isScrolling) {
+          if (Math.abs(diffY) > Math.abs(diffX)) {
+            isScrolling = true;
+            updateSlide(true);
+            return;
+          } else if (Math.abs(diffX) > 10) {
+            isSwipe = true;
+          }
+        }
+
+        if (isSwipe) {
+          if (e.cancelable) e.preventDefault();
+          var viewportWidth = viewport.clientWidth || 1;
+          var dragPercent = (diffX / viewportWidth) * 100;
+          track.style.transform = 'translateX(' + (-idx * 100 + dragPercent) + '%)';
+        }
+      }, { passive: false });
+
+      viewport.addEventListener('touchend', function () {
+        paused = false;
+        if (isSwipe) {
+          var diffX = touchCurrentX - touchStartX;
+          var viewportWidth = viewport.clientWidth || 1;
+          var threshold = viewportWidth * 0.15;
+
+          if (diffX < -threshold) {
+            idx = (idx + 1) % total;
+          } else if (diffX > threshold) {
+            idx = (idx - 1 + total) % total;
+          }
+        }
+        updateSlide(true);
+        stopTimer();
+        startTimer();
+      });
+
+      // Mouse drag events for desktop
+      viewport.addEventListener('mousedown', function (e) {
+        if (e.button !== 0) return; // Left click only
+        isMouseDown = true;
+        paused = true;
+        stopTimer();
+        mouseStartX = e.clientX;
+        isMouseSwipe = false;
+        track.style.transition = 'none';
+      });
+
+      window.addEventListener('mousemove', function (e) {
+        if (!isMouseDown) return;
+        mouseCurrentX = e.clientX;
+        var diffX = mouseCurrentX - mouseStartX;
+
+        if (!isMouseSwipe && Math.abs(diffX) > 10) {
+          isMouseSwipe = true;
+        }
+
+        if (isMouseSwipe) {
+          var viewportWidth = viewport.clientWidth || 1;
+          var dragPercent = (diffX / viewportWidth) * 100;
+          track.style.transform = 'translateX(' + (-idx * 100 + dragPercent) + '%)';
+        }
+      });
+
+      window.addEventListener('mouseup', function () {
+        if (!isMouseDown) return;
+        isMouseDown = false;
+        paused = false;
+
+        if (isMouseSwipe) {
+          var diffX = mouseCurrentX - mouseStartX;
+          var viewportWidth = viewport.clientWidth || 1;
+          var threshold = viewportWidth * 0.15;
+
+          if (diffX < -threshold) {
+            idx = (idx + 1) % total;
+          } else if (diffX > threshold) {
+            idx = (idx - 1 + total) % total;
+          }
+        }
+        updateSlide(true);
+        stopTimer();
+        startTimer();
+      });
+    })();
   </script>
 </body>
 
