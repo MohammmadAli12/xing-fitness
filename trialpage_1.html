@@ -17,7 +17,7 @@
         --red: red;
         --red-glow: rgba(239, 35, 60, 0.4);
         --red-dim: rgba(239, 35, 60, 0.15);
-        --header-h: 120px; /* default fallback for mobile */
+        --header-h: 160px; /* default fallback for mobile — 2-row loc bar + navbar */
       }
       @media (min-width: 768px) {
         :root {
@@ -179,7 +179,7 @@
       </header>
     </div>
 
-    <main class="relative z-10 min-h-screen flex items-center justify-center pt-36 pb-20 px-4">
+    <main class="relative z-10 min-h-screen flex items-center justify-center pb-20 px-4" style="padding-top: calc(var(--header-h) + 2rem)">
       <div class="w-full max-w-xl mx-auto">
         
         <div class="text-center mb-10 animate-fade-up delay-1">
